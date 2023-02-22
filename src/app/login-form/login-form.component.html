@@ -1,0 +1,45 @@
+<form #monFormulaire="ngForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="email">Email : </label>
+    <input
+      type="email"
+      name="email"
+      email
+      required
+      #inputEmail="ngModel"
+      [(ngModel)]="email"
+    />
+  </div>
+  <div>
+    <label for="password">Password : </label>
+    <input
+      type="text"
+      name="password"
+      required
+      minlength="6"
+      #inputPassword="ngModel"
+      [(ngModel)]="password"
+    />
+  </div>
+  <div>
+    <button type="submit">Submit</button>
+  </div>
+
+  <div *ngIf="monFormulaire.submitted">
+    <div *ngIf="monFormulaire.valid">Login validé</div>
+
+    <div *ngIf="inputEmail.errors && inputEmail.errors['required']">
+      L'email est obligatoire
+    </div>
+    <div *ngIf="inputEmail.errors && inputEmail.errors['email']">
+      L'email est incorrect
+    </div>
+
+    <div *ngIf="inputPassword.errors && inputPassword.errors['required']">
+      Le mot de passe est obligatoire
+    </div>
+    <div *ngIf="inputPassword.errors && inputPassword.errors['minlength']">
+      Le mot de passe doit faire au moins 6 caractères
+    </div>
+  </div>
+</form>
